@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>test</title>
+<meta charset="utf-8">
+<script src="js/jquery/jquery-1.7.1.js"></script>
+<link href="css/test.css" rel="stylesheet">
+</head>
+
+<body>
+	<div id='dragContent'>本示例只能用触摸设备使用</div>
+
+	<script>
+		$('#dragContent').on('touchstart touchmove touchend', function(e) {
+			e.preventDefault();
+			var touch = e.originalEvent.touches[0];
+			var obj = $('#dragContent')[0];
+			
+			if (e.type == 'touchstart') {
+				obj.lastX=touch.pageX;
+				obj.lastY=touch.pageY;
+				
+				if(!obj.moveX){
+					obj.moveX=0;
+					obj.moveY=0;
+				}
+			}
+
+			if (e.type == 'touchmove') {
+				obj.moveX+=(touch.pageX-obj.lastX);
+				obj.moveY+=(touch.pageY-obj.lastY);
+				$('#dragContent').css('-webkit-transform','translate('+obj.moveX+'px,'+obj.moveY+'px)');
+				
+				console.log('moveX:'+obj.moveX);
+				
+				obj.lastX=touch.pageX;
+				obj.lastY=touch.pageY;
+			}
+			
+			if(e.type=='touchend'){
+			}
+		});
+	</script>
+</body>
+</html>
