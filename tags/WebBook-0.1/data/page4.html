@@ -1,0 +1,21 @@
+<div id='p4Component' class='imageComponent'></div>
+<script>
+	$('#p4Component').on('touchstart touchmove touchend', function(e) {
+		e.preventDefault();
+
+		var p4image = $('#p4Component')[0];
+
+		if (e.type == 'touchstart') {
+			p4image.moved = false;
+		}
+
+		if (e.type == 'touchmove') {
+			p4image.moved = true;
+		}
+
+		if (e.type == 'touchend' && !p4image.moved) {
+ 			console.log('run touchend.');
+ 			$('#p4Component').toggleClass('doImageScale');	
+		}
+	});
+</script>
